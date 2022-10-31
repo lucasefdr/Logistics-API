@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 public class Client {
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
