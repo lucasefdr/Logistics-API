@@ -3,8 +3,9 @@ package com.lucasferreira.logistics.controller;
 import com.lucasferreira.logistics.domain.model.Client;
 import com.lucasferreira.logistics.service.ClientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +16,14 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    public List<Client> listAll() {
-        return clientService.listAll();
+    @GetMapping
+    public ResponseEntity<List<Client>> listAll() {
+        return ResponseEntity.ok(clientService.listAll());
     }
+
+    @PostMapping
+    public ResponseEntity<Client> save(@RequestBody Client client) {
+        return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
+    }
+
 }

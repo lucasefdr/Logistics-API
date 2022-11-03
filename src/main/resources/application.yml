@@ -1,14 +1,14 @@
-# Corrigindo retorno de erros
 server:
   error:
     include-stacktrace: on-param
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/logistics-api
+    url: jdbc:postgresql://localhost:5432/logistics-api?serverTimezone=UTC
     username: postgres
     password: 123456
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: update
 
