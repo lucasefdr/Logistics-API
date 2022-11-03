@@ -27,8 +27,13 @@ public class ClientController {
     }
 
     @GetMapping(path = "/containing")
-    public ResponseEntity<List<Client>> findByNameContaining(String name) {
+    public ResponseEntity<List<Client>> findByNameContaining(@RequestParam String name) {
         return ResponseEntity.ok(clientService.findByContaining(name));
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Client> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(clientService.findById(id));
     }
 
     @PostMapping

@@ -3,6 +3,7 @@ package com.lucasferreira.logistics.service;
 import com.lucasferreira.logistics.domain.model.Client;
 import com.lucasferreira.logistics.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,14 @@ public class ClientService {
         return clientRepository.findByNameContaining(name);
     }
 
+    public Client findById(Long id) {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+    }
+
     public Client save(Client client) {
         return clientRepository.save(client);
     }
+
+
 }
