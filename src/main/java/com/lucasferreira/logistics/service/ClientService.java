@@ -21,6 +21,14 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+    public List<Client> findByName(String name) {
+        return clientRepository.findByName(name);
+    }
+
+    public List<Client> findByContaining(String name) {
+        return clientRepository.findByNameContaining(name);
+    }
+
     public Client save(Client client) {
         return clientRepository.save(client);
     }

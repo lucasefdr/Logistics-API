@@ -21,6 +21,16 @@ public class ClientController {
         return ResponseEntity.ok(clientService.listAll());
     }
 
+    @GetMapping(path = "/find")
+    public ResponseEntity<List<Client>> findByName(@RequestParam String name) {
+        return ResponseEntity.ok(clientService.findByName(name));
+    }
+
+    @GetMapping(path = "/containing")
+    public ResponseEntity<List<Client>> findByNameContaining(String name) {
+        return ResponseEntity.ok(clientService.findByContaining(name));
+    }
+
     @PostMapping
     public ResponseEntity<Client> save(@RequestBody Client client) {
         return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
