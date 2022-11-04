@@ -6,6 +6,11 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -21,17 +26,23 @@ public class Delivery {
     private Long id;
 
     // Muitas entregas possuí um cliente
+    // @Valid - validação em cascata
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @NotNull
+    @Valid
+    @ConvertGroup(from = Default.class, to = ValidationGroups.ClientId.class) // Conversão de validação de group
     private Client client;
 
     @Embedded
+    @NotNull
     private Addressee addressee;
 
     @Enumerated(EnumType.STRING)
     @JsonProperty(access = Access.READ_ONLY) // Não será processado pelo JSON
     private StatusDelivery statusDelivery;
 
+    @NotNull
     private BigDecimal tax;
 
     @JsonProperty(access = Access.READ_ONLY) // Não será processado pelo JSON

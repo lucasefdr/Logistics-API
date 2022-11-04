@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/delivery")
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class DeliveryController {
     private final DeliveryService deliveryService;
 
     @PostMapping
-    public ResponseEntity<Delivery> request(@RequestBody  Delivery delivery) {
+    public ResponseEntity<Delivery> request(@Valid @RequestBody Delivery delivery) {
         return new ResponseEntity<>(deliveryService.request(delivery), HttpStatus.CREATED);
     }
 }
