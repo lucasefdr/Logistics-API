@@ -1,10 +1,12 @@
 package com.lucasferreira.logistics.service;
 
 import com.lucasferreira.logistics.domain.model.Client;
+import com.lucasferreira.logistics.exception.DomainException;
 import com.lucasferreira.logistics.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -36,7 +38,15 @@ public class ClientService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found."));
     }
 
+    @Transactional
     public Client save(Client client) {
+        boolean emailExists = clientRepository.findByEmail(client.getEmail())
+                .stream()
+                .anyMatch(savedClient -> !savedClient.equals(client));
+
+        if (emailExists) {
+            throw new DomainException("There is already a Client registered with this email");
+        }
         return clientRepository.save(client);
     }
 
@@ -47,6 +57,7 @@ public class ClientService {
         client.setId(savedClient.getId());
     }
 
+    @Transactional
     public void delete(Long id) {
         clientRepository.delete(findById(id));
     }
