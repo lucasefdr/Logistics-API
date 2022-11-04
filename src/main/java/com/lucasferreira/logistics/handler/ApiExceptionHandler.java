@@ -14,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(
                 ValidationExceptionDetails.builder()
-                        .timestamp(LocalDateTime.now())
+                        .timestamp(OffsetDateTime.now())
                         .status(HttpStatus.BAD_REQUEST.value())
                         .title("Bad request exception, invalid fields")
                         .details("Check the field(s) error")
@@ -41,7 +42,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<DomainExceptionDetails> handleDomainException(DomainException exception) {
         return new ResponseEntity<>(
                 DomainExceptionDetails.builder()
-                        .timestamp(LocalDateTime.now())
+                        .timestamp(OffsetDateTime.now())
                         .status(HttpStatus.BAD_REQUEST.value())
                         .title("Bad request exception, check the documentation.")
                         .details(exception.getMessage())

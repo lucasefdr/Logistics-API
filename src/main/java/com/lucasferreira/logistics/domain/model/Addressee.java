@@ -26,7 +26,7 @@ public class Addressee {
     @NotBlank
     @Column(name = "addressee_number")
     private String number;
-    
+
     @Column(name = "addressee_complement")
     private String complement;
 }

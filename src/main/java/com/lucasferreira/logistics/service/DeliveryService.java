@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -25,7 +26,7 @@ public class DeliveryService {
 
         delivery.setClient(clientExists);
         delivery.setStatusDelivery(StatusDelivery.PENDING);
-        delivery.setRequestDate(LocalDateTime.now());
+        delivery.setRequestDate(OffsetDateTime.now());
 
         return deliveryRepository.save(delivery);
     }
