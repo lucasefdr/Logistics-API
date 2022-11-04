@@ -1,6 +1,6 @@
 package com.lucasferreira.logistics.controller;
 
-import com.lucasferreira.logistics.domain.model.Delivery;
+import com.lucasferreira.logistics.domain.Delivery;
 import com.lucasferreira.logistics.dto.DeliveryDTO;
 import com.lucasferreira.logistics.service.DeliveryService;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +18,12 @@ public class DeliveryController {
     private final DeliveryService deliveryService;
 
     @PostMapping
-    public ResponseEntity<Delivery> request(@Valid @RequestBody Delivery delivery) {
+    public ResponseEntity<DeliveryDTO> request(@Valid @RequestBody Delivery delivery) {
         return new ResponseEntity<>(deliveryService.request(delivery), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Delivery>> listAll() {
+    public ResponseEntity<List<DeliveryDTO>> listAll() {
         return ResponseEntity.ok(deliveryService.listAll());
     }
 

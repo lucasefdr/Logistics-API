@@ -1,6 +1,6 @@
 package com.lucasferreira.logistics.service;
 
-import com.lucasferreira.logistics.domain.model.Client;
+import com.lucasferreira.logistics.domain.Client;
 import com.lucasferreira.logistics.exception.DomainException;
 import com.lucasferreira.logistics.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;

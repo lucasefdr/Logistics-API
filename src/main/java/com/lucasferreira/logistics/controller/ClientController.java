@@ -1,6 +1,6 @@
 package com.lucasferreira.logistics.controller;
 
-import com.lucasferreira.logistics.domain.model.Client;
+import com.lucasferreira.logistics.domain.Client;
 import com.lucasferreira.logistics.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

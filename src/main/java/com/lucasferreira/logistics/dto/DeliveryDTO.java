@@ -1,6 +1,6 @@
 package com.lucasferreira.logistics.dto;
 
-import com.lucasferreira.logistics.domain.model.StatusDelivery;
+import com.lucasferreira.logistics.domain.StatusDelivery;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,6 @@
 package com.lucasferreira.logistics.repository;
 
-import com.lucasferreira.logistics.domain.model.Client;
+import com.lucasferreira.logistics.domain.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.lucasferreira.logistics.domain.model;
+package com.lucasferreira.logistics.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
