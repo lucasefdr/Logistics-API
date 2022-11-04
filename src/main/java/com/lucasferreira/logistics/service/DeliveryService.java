@@ -3,8 +3,6 @@ package com.lucasferreira.logistics.service;
 import com.lucasferreira.logistics.domain.Client;
 import com.lucasferreira.logistics.domain.Delivery;
 import com.lucasferreira.logistics.domain.StatusDelivery;
-import com.lucasferreira.logistics.dto.DeliveryDTO;
-import com.lucasferreira.logistics.mapper.DeliveryMapper;
 import com.lucasferreira.logistics.repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,27 +18,25 @@ import java.util.List;
 public class DeliveryService {
     private final ClientService clientService;
     private final DeliveryRepository deliveryRepository;
-    private final DeliveryMapper deliveryMapper;
+
 
     @Transactional
-    public DeliveryDTO request(Delivery delivery) {
+    public Delivery request(Delivery delivery) {
         Client clientExists = clientService.findById(delivery.getClient().getId());
 
         delivery.setClient(clientExists);
         delivery.setStatusDelivery(StatusDelivery.PENDING);
         delivery.setRequestDate(OffsetDateTime.now());
 
-        deliveryRepository.save(delivery);
-
-        return deliveryMapper.toDelivery(delivery);
+        return deliveryRepository.save(delivery);
     }
 
-    public List<DeliveryDTO> listAll() {
-        return deliveryMapper.toCollectionDelivery(deliveryRepository.findAll());
+    public List<Delivery> listAll() {
+        return deliveryRepository.findAll();
     }
 
-    public DeliveryDTO findById(Long id) {
-        return deliveryRepository.findById(id).map(deliveryMapper::toDelivery)
+    public Delivery findById(Long id) {
+        return deliveryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Delivery not found"));
     }
 }
