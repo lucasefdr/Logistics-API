@@ -1,10 +1,13 @@
 package com.lucasferreira.logistics.domain.model;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 // Irá fazer parte da tabela Delivery
 @Embeddable
+@Data
 public class Addressee {
 
     @Column(name = "addressee_name")

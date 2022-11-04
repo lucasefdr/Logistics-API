@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("client")
+@RequestMapping("/client")
 @RequiredArgsConstructor
 public class ClientController {
 

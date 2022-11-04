@@ -1,9 +1,8 @@
 package com.lucasferreira.logistics.handler;
 
+import com.lucasferreira.logistics.exception.ValidationExceptionDetails;
 import com.lucasferreira.logistics.exception.DomainException;
 import com.lucasferreira.logistics.exception.DomainExceptionDetails;
-import com.lucasferreira.logistics.exception.ExceptionDetails;
-import com.lucasferreira.logistics.exception.ValidationExceptionDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
