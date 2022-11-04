@@ -1,6 +1,7 @@
 package com.lucasferreira.logistics.controller;
 
 import com.lucasferreira.logistics.domain.model.Delivery;
+import com.lucasferreira.logistics.dto.DeliveryDTO;
 import com.lucasferreira.logistics.service.DeliveryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class DeliveryController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Delivery> findById(@PathVariable Long id) {
+    public ResponseEntity<DeliveryDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(deliveryService.findById(id));
     }
 }

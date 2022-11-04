@@ -3,14 +3,15 @@ package com.lucasferreira.logistics.service;
 import com.lucasferreira.logistics.domain.model.Client;
 import com.lucasferreira.logistics.domain.model.Delivery;
 import com.lucasferreira.logistics.domain.model.StatusDelivery;
+import com.lucasferreira.logistics.dto.DeliveryDTO;
 import com.lucasferreira.logistics.repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class DeliveryService {
     private final ClientService clientService;
     private final DeliveryRepository deliveryRepository;
+    private final ModelMapper modelMapper;
 
     @Transactional
     public Delivery request(Delivery delivery) {
@@ -35,8 +37,10 @@ public class DeliveryService {
         return deliveryRepository.findAll();
     }
 
-    public Delivery findById(Long id) {
-        return deliveryRepository.findById(id)
+    public DeliveryDTO findById(Long id) {
+        return deliveryRepository.findById(id).map(delivery -> {
+                    return modelMapper.map(delivery, DeliveryDTO.class);
+                })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Delivery not found"));
     }
 }
