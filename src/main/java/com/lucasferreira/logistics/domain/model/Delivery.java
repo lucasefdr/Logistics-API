@@ -1,5 +1,7 @@
 package com.lucasferreira.logistics.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -27,10 +29,15 @@ public class Delivery {
     private Addressee addressee;
 
     @Enumerated(EnumType.STRING)
+    @JsonProperty(access = Access.READ_ONLY) // Não será processado pelo JSON
     private StatusDelivery statusDelivery;
 
     private BigDecimal tax;
+
+    @JsonProperty(access = Access.READ_ONLY) // Não será processado pelo JSON
     private LocalDateTime requestDate;
+
+    @JsonProperty(access = Access.READ_ONLY) // Não será processado pelo JSON
     private LocalDateTime completionDate;
 
     @Override
