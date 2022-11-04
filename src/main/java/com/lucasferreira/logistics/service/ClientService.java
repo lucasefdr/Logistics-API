@@ -35,7 +35,7 @@ public class ClientService {
 
     public Client findById(Long id) {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client not found"));
     }
 
     @Transactional
