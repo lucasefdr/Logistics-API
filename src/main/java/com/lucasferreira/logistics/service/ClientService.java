@@ -3,8 +3,9 @@ package com.lucasferreira.logistics.service;
 import com.lucasferreira.logistics.domain.model.Client;
 import com.lucasferreira.logistics.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,11 +33,22 @@ public class ClientService {
 
     public Client findById(Long id) {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found."));
     }
 
     public Client save(Client client) {
         return clientRepository.save(client);
+    }
+
+
+    public void replace(Client client) {
+        Client savedClient = findById(client.getId());
+        clientRepository.save(client);
+        client.setId(savedClient.getId());
+    }
+
+    public void delete(Long id) {
+        clientRepository.delete(findById(id));
     }
 
 

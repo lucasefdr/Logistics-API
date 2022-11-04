@@ -4,14 +4,14 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/logistics-api?serverTimezone=UTC
+    url: jdbc:postgresql://localhost:5432/logistics-api
     username: postgres
     password: 123456
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-
+      
 logging:
   level:
     org:
