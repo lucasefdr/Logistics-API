@@ -35,6 +35,7 @@ public class Delivery {
     private Client client;
 
     @Embedded
+    @Valid
     @NotNull
     private Addressee addressee;
 
