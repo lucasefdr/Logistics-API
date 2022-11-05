@@ -2,6 +2,7 @@ package com.lucasferreira.logistics.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.lucasferreira.logistics.exception.DomainException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -82,5 +83,18 @@ public class Delivery {
         this.getOccurrences().add(occurrence);
 
         return occurrence;
+    }
+
+    public void finished() {
+        if (!canBeFinished()) {
+            throw new DomainException("Delivery can't be finished");
+        }
+
+        setStatusDelivery(StatusDelivery.COMPLETED);
+        setCompletionDate(OffsetDateTime.now());
+    }
+
+    public boolean canBeFinished() {
+        return StatusDelivery.PENDING.equals(getStatusDelivery());
     }
 }

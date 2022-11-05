@@ -4,6 +4,7 @@ import com.lucasferreira.logistics.domain.Delivery;
 import com.lucasferreira.logistics.dto.DeliveryDTO;
 import com.lucasferreira.logistics.dto.input.DeliveryInput;
 import com.lucasferreira.logistics.mapper.DeliveryMapper;
+import com.lucasferreira.logistics.service.DeliveryCompletionService;
 import com.lucasferreira.logistics.service.DeliveryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.List;
 public class DeliveryController {
     private final DeliveryService deliveryService;
     private final DeliveryMapper deliveryMapper;
+    private final DeliveryCompletionService deliveryCompletionService;
 
     @PostMapping
     public ResponseEntity<DeliveryDTO> request(@Valid @RequestBody DeliveryInput deliveryInput) {
@@ -36,5 +38,11 @@ public class DeliveryController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<DeliveryDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(deliveryMapper.toDeliveryDTO((deliveryService.findById(id))));
+    }
+
+    @PutMapping("/{id}/finish")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finish(@PathVariable Long id) {
+        deliveryCompletionService.toFinish(id);
     }
 }
