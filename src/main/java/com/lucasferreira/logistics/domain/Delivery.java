@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -55,7 +56,7 @@ public class Delivery {
     @JsonProperty(access = Access.READ_ONLY) // Não será processado pelo JSON
     private OffsetDateTime completionDate;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
     private List<Occurrence> occurrences;
 
     @Override
@@ -69,5 +70,17 @@ public class Delivery {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public Occurrence addOccurrence(String description) {
+        Occurrence occurrence = new Occurrence();
+
+        occurrence.setDescription(description);
+        occurrence.setRegisterDate(OffsetDateTime.now());
+        occurrence.setDelivery(this);
+
+        this.getOccurrences().add(occurrence);
+
+        return occurrence;
     }
 }
