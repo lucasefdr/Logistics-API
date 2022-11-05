@@ -15,6 +15,7 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -53,6 +54,9 @@ public class Delivery {
 
     @JsonProperty(access = Access.READ_ONLY) // Não será processado pelo JSON
     private OffsetDateTime completionDate;
+
+    @OneToMany(mappedBy = "delivery")
+    private List<Occurrence> occurrences;
 
     @Override
     public boolean equals(Object o) {
