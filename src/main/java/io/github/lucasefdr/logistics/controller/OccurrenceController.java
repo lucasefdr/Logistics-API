@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/delivery/{id}/occurrence")
+@RequestMapping("api/v1/delivery/{id}/occurrence")
 @RequiredArgsConstructor
 public class OccurrenceController {
     private final OccurrenceService occurrenceService;
