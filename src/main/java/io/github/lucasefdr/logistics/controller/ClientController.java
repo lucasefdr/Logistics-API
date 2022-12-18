@@ -38,7 +38,9 @@ public class ClientController {
     }
 
     @GetMapping(path = "/client/{id}")
-    public ResponseEntity<Client> findById(@PathVariable Long id) {
+    public ResponseEntity<Client> findById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        log.info(userDetails);
         return ResponseEntity.ok(clientService.findById(id));
     }
 

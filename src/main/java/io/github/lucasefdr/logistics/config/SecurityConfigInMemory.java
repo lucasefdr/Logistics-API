@@ -17,10 +17,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import java.util.ArrayList;
 import java.util.List;
 
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@Log4j2
-public class SecurityConfig {
+/*@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)*/
+public class SecurityConfigInMemory {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -42,28 +41,24 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    /*@Bean
+    @Bean
     public InMemoryUserDetailsManager users(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
         UserDetails user1 = User
                 .withUsername("lucasefdr")
-                .password(passwordEncoder.encode("pass"))
+                .password(passwordEncoder().encode("pass"))
                 .roles("ADMIN", "USER")
                 .build();
 
         UserDetails user2 = User
                 .withUsername("laramfdr")
-                .password(passwordEncoder.encode("pass"))
+                .password(passwordEncoder().encode("pass"))
                 .roles("USER")
                 .build();
-
-        log.info(passwordEncoder.encode("pass"));
 
         List<UserDetails> users = new ArrayList<>();
         users.add(user1);
         users.add(user2);
 
         return new InMemoryUserDetailsManager(users);
-    }*/
+    }
 }
